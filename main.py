@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-""" Python script to manage different components of the reporting of Serious Adverse Events (SAEs) in the ICARIA
-Clinical Trial. These components are: (1) SAE numbering, etc."""
+""" Python script to manage SAE numbering component of the reporting of Serious
+Adverse Events (SAEs) in the ICARIA Clinical Trial"""
 
 from datetime import datetime
 import pandas
@@ -15,7 +15,7 @@ __version__ = "0.0.1"
 __date__ = "20210629"
 __maintainer__ = "Andreu Bofill"
 __email__ = "andreu.bofill@isglobal.org"
-__status__ = "Dev"
+__status__ = "Finished"
 
 if __name__ == '__main__':
     URL = tokens.URL
@@ -53,7 +53,6 @@ if __name__ == '__main__':
                 if index != previous_index:
                     previous_sae_number = ''
 
-               # print(index, row['sae_number'])
                 if pandas.isna(row['sae_number']) or "-" not in row['sae_number'].split("ICA-")[1]:
                     if previous_sae_number=='':
                         sae_number = row['study_number'] + "-01"
@@ -72,7 +71,6 @@ if __name__ == '__main__':
                         'redcap_repeat_instance': row['redcap_repeat_instance_x'],
                         'sae_number': sae_number
                     }
-                    print (index)
                     to_import.append(record_dict)
                     previous_sae_number = sae_number
                 else:
